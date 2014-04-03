@@ -6,7 +6,7 @@
   };
 
   View.prototype.start = function(){
-    this.boardSize = 30
+    this.boardSize = 40
     this.board = new Snake.Board(this.boardSize);
     this.handleKeyEvent();
     var that = this;
