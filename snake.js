@@ -62,12 +62,12 @@
 
   var Snake = root.Snake = (root.Snake || {});
 
-  var Board = Snake.Board = function (num) {
-    var start = [Math.floor(num / 2), Math.floor(num / 2)]
+  var Board = Snake.Board = function (x, y) {
+    var start = [Math.floor(x / 2), Math.floor(y / 2)]
     this.snake = new Snake.theSnake(start);
     this.apples = [];
-    this.grid = this.createGrid(num);
-    this.max = num;
+    this.grid = this.createGrid(x, y);
+    this.max = [x, y];
     this.score = 0;
   };
 
@@ -82,11 +82,11 @@
     return false;
   }
 
-  Board.prototype.createGrid = function(num) {
+  Board.prototype.createGrid = function(x, y) {
     var grid = [];
-    for(var i = 0; i < num; i++){
+    for(var i = 0; i < y; i++){
       grid[i] = [];
-      for(var j = 0; j < num; j++){
+      for(var j = 0; j < x; j++){
         grid[i][j] = " . ";
       }
     }
@@ -113,8 +113,8 @@
 
   Board.prototype.inBounds = function() {
     var head = this.snake.head;
-    return (head[0] >= 0 && head[0] < this.max &&
-                 head[1] >= 0 && head[1] < this.max);
+    return (head[0] >= 0 && head[0] < this.max[1] &&
+                 head[1] >= 0 && head[1] < this.max[0]);
   };
 
   Board.prototype.Canibal = function(){
@@ -131,12 +131,12 @@
   Board.prototype.makeApples = function(){
     if (this.apples.length === 0) {
       while (this.apples.length < 3) {
-        var randX = Math.floor(Math.random()*this.max);
-        var randY = Math.floor(Math.random()*this.max);
+        var randX = Math.floor(Math.random()*this.max[0]);
+        var randY = Math.floor(Math.random()*this.max[1]);
         var snake = this.snake.segments.concat(this.snake.head);
         var goodApple = true;
         for(var i = 0; i < snake.length; i++){
-          if (snake[i][0] === randX && snake[i][1] === randY) {
+          if (snake[i][1] === randX && snake[i][0] === randY) {
             goodApple = false;
           }
         }
@@ -146,9 +146,10 @@
           }
         }
         if (goodApple) {
-          this.apples.push([randX, randY]);
+          this.apples.push([randY, randX]);
         }
       }
+			debugger
     }
   }
 

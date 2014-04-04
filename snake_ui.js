@@ -6,11 +6,11 @@
   };
 
   View.prototype.start = function(){
-    this.boardSize = 40
-    this.board = new Snake.Board(this.boardSize);
+		this.board_size = [30, 20];
+    this.board = new Snake.Board(this.board_size[0], this.board_size[1]);
     this.handleKeyEvent();
     var that = this;
-    this.timerId = root.setInterval(that.step.bind(that), 60);
+    this.timerId = root.setInterval(that.step.bind(that), 50);
     this.appleTimer = root.setInterval(that.board.makeApples.bind(that.board), 2000);
   };
 
@@ -35,16 +35,27 @@
     var that = this;
     $(window).keydown(function(e){
       switch(e.keyCode){
+			 case 32:
+				 if (that.timerId) {
+					 root.clearInterval(that.timerId)
+				 }
+				 that.start()
+				 break;
        case 37:
+			 case 65:
+			 
          that.board.snake.turn('W')
          break;
        case 38:
+			 case 87:
          that.board.snake.turn('N')
          break;
        case 39:
+			 case 68:
          that.board.snake.turn('E')
          break;
        case 40:
+			 case 83:
          that.board.snake.turn('S')
          break;
        default:
@@ -54,8 +65,8 @@
 
   View.prototype.displayGrid = function(grid) {
     var gridHTML = "";
-    for (var i = 0; i < this.boardSize; i++) {
-      for (var j = 0; j < this.boardSize; j++) {
+    for (var i = 0; i < this.board_size[1]; i++) {
+      for (var j = 0; j < this.board_size[0]; j++) {
 
         if (grid[i][j] === "O"){
           gridHTML += "<div data-x='"+j+"' data-y='"+i+"' class='cell snake-head' ></div>"

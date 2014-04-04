@@ -1,12 +1,23 @@
+.outer-wrapper {
+	width: 100%;
+}
+
+.inner-wrapper {
+	width: 760px;
+	margin: 20px auto;
+}
+
 .container {
-  width: 800px;
-  margin: 10px auto;
+  width: 630px;
   border: 1px solid #ccc;
 }
 
 .cell {
   width: 20px;
   height: 20px;
+	border-right:1px solid #f3f3f3;
+	border-bottom:1px solid #f3f3f3;
+	
   float: left;
 }
 
@@ -16,13 +27,11 @@
 
 .snake-head {
   background-color: #287A42;
-  border-radius: 10px;
 
 }
 
 .snake {
   background-color: #5FDE87;
-  border-radius: 10px;
 
 }
 
@@ -32,10 +41,31 @@
 
 }
 
-.game-info {
-  width:700px;
-  margin: 0 auto;
+.game-instructions {
+	float: left;
+  margin-top: 10px;
   padding:5px;
+}
+
+.game-key {
+	border: 1px solid #ccc;;
+	margin-left: 2px;
+	padding: 1px 5px;
+	border-radius: 3px;
+	display: inline-block;
+}
+
+.game-info {
+	float: right;
+	margin: 10px 130px 0px 0px;
+}
+
+.clear-both {
+	clear:both;
+}
+
+.text-center {
+	text-align: center;
 }
 
 .score {
@@ -43,4 +73,11 @@
   font-size: 24px;
   font-weight: bold;
 
+}
+
+.leader-board {
+	width: 610px;
+	margin-top: 15px;
+	border: 1px solid #ccc;
+	padding: 10px;
 }
